@@ -2,19 +2,24 @@
   <div id="app">
     <Nav></Nav>
     <div class="margemPrincipal">
-      <Aluno />
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
-import Aluno from "./components/Aluno/Aluno.vue";
+import Aluno from "./components/Aluno/Aluno";
+import Professor from "./components/Professor/Professor";
+import Sobre from "./components/Sobre/Sobre";
 import Nav from "./components/_nav/Nav";
 
 export default {
   name: "App",
   components: {
+    /* eslint-disable vue/no-unused-components */
     Aluno,
+    Professor,
+    Sobre,
     Nav,
   },
 };
