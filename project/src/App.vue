@@ -1,16 +1,21 @@
 <template>
   <div id="app">
-    <Aluno />
+    <Nav></Nav>
+    <div class="margemPrincipal">
+      <Aluno />
+    </div>
   </div>
 </template>
 
 <script>
 import Aluno from "./components/Aluno/Aluno.vue";
+import Nav from "./components/_nav/Nav";
 
 export default {
   name: "App",
   components: {
     Aluno,
+    Nav,
   },
 };
 </script>
@@ -31,7 +36,13 @@ html {
   height: 100%;
 }
 
+.margemPrincipal {
+  width: 50%;
+  margin: auto;
+}
+
 #app {
+  width: 100%;
 }
 
 .btn_Danger {
