@@ -10,11 +10,19 @@
       <tbody v-if="Professores.length">
         <tr v-for="(professor, index) in Professores" :key="index">
           <!-- <td>{{ index + 1 }}</td> -->
-          <td>{{ professor.id }}</td>
-          <router-link to="/alunos" tag="td" style="cursor: pointer">
+          <td class="colPeq">
+            {{ professor.id }}
+          </td>
+          <router-link
+            :to="`/alunos/${professor.id}`"
+            tag="td"
+            style="cursor: pointer"
+          >
             {{ professor.nome }} {{ professor.sobrenome }}
           </router-link>
-          <td>3</td>
+          <td class="colPeq">
+            {{ professor.qtdAlunos }}
+          </td>
         </tr>
       </tbody>
       <tfoot v-else>
@@ -32,14 +40,48 @@ export default {
   },
   data() {
     return {
-      Professores: [
-        { id: 1, nome: "Fernanda" },
-        { id: 2, nome: "Paulo" },
-        { id: 3, nome: "Luis" },
-      ],
+      Professores: [],
     };
+  },
+  created() {
+    this.$http
+      .get("http://localhost:3000/alunos")
+      .then((res) => res.json())
+      .then((alunos) => {
+        this.Alunos = alunos;
+        this.carregarProfessores();
+      });
+  },
+  props: {},
+  methods: {
+    pegarQtdAlunosPorProfessores() {
+      this.Professores.forEach((professor, index) => {
+        professor = {
+          id: professor.id,
+          nome: professor.nome,
+          qtdAlunos: this.Alunos.filter(
+            (aluno) => aluno.professor.id == professor.id
+          ).length,
+        };
+        this.Professores[index] = professor;
+      });
+    },
+    carregarProfessores() {
+      this.$http
+        .get("http://localhost:3000/professores")
+        .then((res) => res.json())
+        .then((professor) => {
+          this.Professores = professor;
+          this.pegarQtdAlunosPorProfessores();
+        });
+    },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.colPeq {
+  text-align: center;
+  width: 15%;
+}
+</style>

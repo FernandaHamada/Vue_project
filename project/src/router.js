@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import Aluno from "./components/Aluno/Aluno";
+import AlunoEdit from "./components/Aluno/AlunoEdit";
 import Professor from "./components/Professor/Professor";
 import Sobre from "./components/Sobre/Sobre";
 
@@ -15,9 +16,19 @@ export default new Router({
       component: Professor,
     },
     {
-      path: "/alunos",
+      path: "/alunos/:prof_id",
       name: "Alunos",
       component: Aluno,
+    },
+    {
+      path: "/todos-alunos",
+      name: "Alunos",
+      component: Aluno,
+    },
+    {
+      path: "/aluno-detalhe/:id",
+      name: "Alunos-Detalhe",
+      component: AlunoEdit,
     },
     {
       path: "/sobre",

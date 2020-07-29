@@ -2,7 +2,7 @@
   <div id="app">
     <Nav></Nav>
     <div class="margemPrincipal">
-      <router-view></router-view>
+      <router-view :key="$route.fullPath"></router-view>
     </div>
   </div>
 </template>
@@ -52,6 +52,7 @@ html {
 
 .btn_Danger {
   background-color: #fa4430;
+  font-size: 0.8em !important;
 }
 
 .btn {
@@ -62,6 +63,7 @@ html {
   font-weight: bold;
   border-radius: 5px;
   border-bottom: 3px solid black;
+  font-size: 1.2em;
 }
 
 .btn:hover {
@@ -94,5 +96,8 @@ table thead th {
 
 .colPeq {
   width: 5%;
+  text-align: right;
+  background-color: rgb(125, 217, 245);
+  font-weight: bold;
 }
 </style>
