@@ -2,17 +2,19 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using project_api.Models;
 
-namespace project_api.project_api.Data {
-    public class DataContext : DbContext {
-        public DataContext (DbContextOptions<DataContext> options) : base (options) { }
-
+namespace project_api.Data
+{
+    public class DataContext : DbContext
+    {
+        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Professor> Professores { get; set; }
 
-        protected override void OnModelCreating (ModelBuilder builder) {
-            builder.Entity<Professor> ()
-                .HasData (
-                    new List<Professor> () {
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Professor>()
+                .HasData(
+                    new List<Professor>() {
                         new Professor () {
                                 Id = 1,
                                     Nome = "Fernanda"
@@ -28,9 +30,9 @@ namespace project_api.project_api.Data {
                     }
                 );
 
-            builder.Entity<Aluno> ()
-                .HasData (
-                    new List<Aluno> () {
+            builder.Entity<Aluno>()
+                .HasData(
+                    new List<Aluno>() {
                         new Aluno () {
                                 Id = 1,
                                     Nome = "Mario",
