@@ -1,6 +1,6 @@
 <template>
   <div>
-    <titulo texto="Professores" />
+    <titulo texto="Professores" :btnVoltar="true" />
     <table>
       <thead>
         <th>Código</th>
@@ -10,23 +10,21 @@
       <tbody v-if="Professores.length">
         <tr v-for="(professor, index) in Professores" :key="index">
           <!-- <td>{{ index + 1 }}</td> -->
-          <td class="colPeq">
-            {{ professor.id }}
-          </td>
+          <td class="colPeq">{{ professor.id }}</td>
           <router-link
             :to="`/alunos/${professor.id}`"
             tag="td"
             style="cursor: pointer"
-          >
-            {{ professor.nome }} {{ professor.sobrenome }}
-          </router-link>
-          <td class="colPeq">
-            {{ professor.qtdAlunos }}
-          </td>
+          >{{ professor.nome }} {{ professor.sobrenome }}</router-link>
+          <td class="colPeq">{{ professor.qtdAlunos }}</td>
         </tr>
       </tbody>
       <tfoot v-else>
-        Nenhum professor encontrado
+        <tr>
+          <td colspan="3" style="text-align: center;">
+            <h5>Nenhum professor encontrado</h5>
+          </td>
+        </tr>
       </tfoot>
     </table>
   </div>
@@ -45,7 +43,7 @@ export default {
   },
   created() {
     this.$http
-      .get("http://localhost:3000/alunos")
+      .get("http://localhost:5000/api/alunos")
       .then((res) => res.json())
       .then((alunos) => {
         this.Alunos = alunos;
@@ -68,7 +66,7 @@ export default {
     },
     carregarProfessores() {
       this.$http
-        .get("http://localhost:3000/professores")
+        .get("http://localhost:5000/api/professor")
         .then((res) => res.json())
         .then((professor) => {
           this.Professores = professor;
